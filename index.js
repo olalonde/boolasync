@@ -114,7 +114,7 @@ var last_expr;
     var args = Array.prototype.slice.call(arguments, 0);
     if (Array.isArray(args[0])) {
       args = args[0];
-      console.log(args);
+      //console.log(args);
     }
     expr.add(args);
 
