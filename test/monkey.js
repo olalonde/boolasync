@@ -1,8 +1,6 @@
 var assert = require('assert'),
-  boolasync = require('../'),
-  wrap = boolasync.wrap;
+  bool = require('../')({ monkey: true });
 
-// false
 var truefn = function (cb) {
   process.nextTick(function () {
     cb(null, true);
@@ -30,34 +28,7 @@ var assert_false = function (done) {
 };
 
 describe('bool', function () {
-  describe('methods', function () {
-    var methods = ['and', 'or', 'andNot', 'orNot'];
-
-    it ('should not be on Function.prototype', function () {
-      methods.forEach(function (method) {
-        assert(!Function.prototype[method]);
-      });
-    });
-
-    it ('should not be available on non wrapped function', function () {
-      methods.forEach(function (method) {
-        assert(!((function () {})[method]));
-      });
-    });
-    it ('should be available on wrapped function', function() {
-      methods.forEach(function (method) {
-        assert(wrap(function () {})[method]);
-      });
-    });
-  });
-
   describe('expressions', function () {
-    // wrap functions
-    before(function () {
-      truefn = wrap(truefn);
-      falsefn = wrap(falsefn);
-    });
-
     it('true && true', function (done) {
       truefn.and(truefn).eval(assert_true(done));
     });

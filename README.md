@@ -5,6 +5,8 @@
 Async boolean logic.
 
 ```javascript
+require('boolasync')({ monkey: true }); 
+
 // fn1 && fn2 || fn3 && (fn4 || !fn5 && fn6)
 fn1.and(fn2).or(fn3).and(fn4.orNot(fn5).and(fn6)).eval(function (err, res) {
   if (err) return console.error(err);
@@ -23,6 +25,26 @@ lazy evaluates callbacks. Meaning that it won't wait for a function's
 return value if it already knows the final result will be false/true. Just like Javascript does.
 
 ## Usage
+
+```javascript
+// this will monkey patch Function.prototype to expose .and, .or,
+.andNot and .or Not
+
+var boolasync = require('boolasync')({ monkey: true });
+
+// if you dislike monkey patching
+
+var boolasync = require('boolasync'),
+  w = boolasync.wrap;
+
+// now you need to wrap functions with boolasync.wrap before you
+// can call the boolean operators on them
+
+fn1 = w(fn1);
+fn2 = w(fn2);
+
+fn1.and(fn2.or(fn3));
+```
 
 (wannabe) [BNF notation](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form):
 
@@ -96,10 +118,6 @@ is_user.and([is_admin, is_superadmin])
 is_user.and(is_admin, is_superadmin)
 ```
 
-## This module monkey patches Function.prototype... OMG!!! 
-
-Yes -_-
-
 ## Roadmap
 
 - Support this type of syntax:
@@ -113,6 +131,10 @@ bool("? and ? or (? and ?)", [ fn1, fn2, fn3, fn4 ], cb);
 - Wrapper utility for sync functions and non-functions.
 
 Instead of `.eval(cb)`, simply call `(cb)` at the end.
+
+- Version that uses function generators
+
+- Stingify expression object to nice representation. i.e.: (fn1 && fn2 || fn3)
 
 ## License
 

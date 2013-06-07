@@ -71,6 +71,11 @@ Expression.prototype.getCallback = function () {
 Expression.prototype.eval = function (cb) {
   this.externalCallback = cb;
 
+  if (this.type === 'atomic') {
+    this.operands[0](cb);
+    return this;
+  }
+
   var _this = this;
   this.operands.forEach(function (operand) {
     // execute functions in parallel
@@ -93,34 +98,49 @@ Expression.prototype.eval = function (cb) {
 // the first and/or/andNot/orNot
 // fn1.and(fn2.or(fn3))
 
-var last_expr;
+function add_methods_to (target) {
+  ['and', 'or', 'andNot', 'orNot'].forEach(function (method) {
+    var inverse = false;
+    var type = method;
+    var matches = /^(.*)Not$/.exec(method);
 
-['and', 'or', 'andNot', 'orNot'].forEach(function (method) {
-  var inverse = false;
-  var type = method;
-  var matches = /^(.*)Not$/.exec(method);
-
-  // andNot => type = and, inverse = true
-  if (matches) {
-    type = matches[1];
-    inverse = true;
-  }
-
-  Function.prototype[method] = Expression.prototype[method] = function () {
-    var expr = new Expression(type, inverse);
-
-    expr.add(this);
-
-    var args = Array.prototype.slice.call(arguments, 0);
-    if (Array.isArray(args[0])) {
-      args = args[0];
-      //console.log(args);
+    // andNot => type = and, inverse = true
+    if (matches) {
+      type = matches[1];
+      inverse = true;
     }
-    expr.add(args);
 
-    //console.log(expr);
+  target[method] = function () {
+      var expr = new Expression(type, inverse);
 
-    return expr;
-  };
-});
+      expr.add(this);
+
+      var args = Array.prototype.slice.call(arguments, 0);
+      if (Array.isArray(args[0])) {
+        args = args[0];
+        //console.log(args);
+      }
+      expr.add(args);
+
+      //console.log(expr);
+
+      return expr;
+    };
+  });
+}
+
+add_methods_to(Expression.prototype);
+
+module.exports = function (opts) {
+  opts = opts || {};
+  if (opts.monkey) {
+    add_methods_to(Function.prototype);
+  }
+};
+
+module.exports.wrap = function (something) {
+  var expr = new Expression('atomic');
+  expr.add(something);
+  return expr;
+};
 
