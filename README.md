@@ -1,6 +1,6 @@
-# Bool
+# Boolasync
 
-[![NPM version](https://badge.fury.io/js/boolasync.png)](http://badge.fury.io/js/boolasync)
+[![Build Status](https://travis-ci.org/olalonde/boolasync.png)](https://travis-ci.org/olalonde/boolasync) [![NPM version](https://badge.fury.io/js/boolasync.png)](http://badge.fury.io/js/boolasync)
 
 Async boolean logic.
 
@@ -35,7 +35,7 @@ return value if it already knows the final result will be false/true. Just like 
 
 or
 
-```
+```javascript
 fn.and(fn2).eval(cb)
 fn.or(fn2).eval(cb)
 fn.andNot(fn2).eval(cb)
@@ -51,7 +51,7 @@ the result of the expression.
 
 You can nest expressions:
 
-```
+```javascript
 // fn && (fn2 || fn3)
 fn.and(fn2.or(fn3)).eval()
 ```
@@ -88,7 +88,7 @@ is_user.and(is_admin.or(is_superadmin)).eval(function (err, istrue) {
 
 3 ways to write the same thing:
 
-```
+```javascript
 is_user.and(is_admin).and(is_superadmin)
 
 is_user.and([is_admin, is_superadmin])
