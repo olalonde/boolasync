@@ -18,6 +18,9 @@
     "flow-control",
     "logic"
   ],
+  "devDependencies": {
+    "mocha": "~2.7.9"
+  },
   "author": "Olivier Lalonde <olalonde@gmail.com>",
   "license": "MIT"
 }
