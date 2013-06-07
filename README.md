@@ -1,6 +1,6 @@
 # Bool
 
-[![NPM version](https://badge.fury.io/js/connectr.png)](http://badge.fury.io/js/connectr)
+[![NPM version](https://badge.fury.io/js/boolasync.png)](http://badge.fury.io/js/boolasync)
 
 Async boolean logic.
 
