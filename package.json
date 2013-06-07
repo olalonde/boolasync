@@ -1,0 +1,23 @@
+{
+  "name": "boolasync",
+  "version": "0.0.1",
+  "description": "Async boolean expressions",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/"
+  },
+  "homepage": "https://github.com/olalonde/boolasync",
+  "repository": "git@github.com:olalonde/boolasync.git",
+  "issues": "https://github.com/olalonde/boolasync/issues",
+  "keywords": [
+    "async",
+    "bool",
+    "boolean",
+    "flow",
+    "control",
+    "flow-control",
+    "logic"
+  ],
+  "author": "Olivier Lalonde <olalonde@gmail.com>",
+  "license": "MIT"
+}
