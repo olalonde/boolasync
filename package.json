@@ -1,6 +1,6 @@
 {
   "name": "boolasync",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Async boolean expressions",
   "main": "index.js",
   "scripts": {
