@@ -31,7 +31,7 @@ return value if it already knows the final result will be false/true. Just like 
 
 var boolasync = require('boolasync')({ monkey: true });
 
-// if you dislike monkey patching
+// if you don't want monkey patching
 
 var boolasync = require('boolasync'),
   w = boolasync.wrap;
