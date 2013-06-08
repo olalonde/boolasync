@@ -27,8 +27,7 @@ return value if it already knows the final result will be false/true. Just like 
 ## Usage
 
 ```javascript
-// this will monkey patch Function.prototype to expose .and, .or,
-.andNot and .or Not
+// this will monkey patch Function.prototype to expose .and, .or, .andNot and .or Not
 
 var boolasync = require('boolasync')({ monkey: true });
 
