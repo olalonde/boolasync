@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/olalonde/boolasync.png)](https://travis-ci.org/olalonde/boolasync) [![NPM version](https://badge.fury.io/js/boolasync.png)](http://badge.fury.io/js/boolasync)
 
-Async boolean logic.
+Async boolean logic. Introduction: [http://syskall.com/introducing-boolasync-async-boolean-logic-library/](http://syskall.com/introducing-boolasync-async-boolean-logic-library/)
 
 ```javascript
 require('boolasync')({ monkey: true }); 
